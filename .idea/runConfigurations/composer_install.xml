@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="composer install" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/composer.phar" scriptParameters="install">
+    <method v="2" />
+  </configuration>
+</component>
