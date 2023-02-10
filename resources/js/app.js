@@ -4,8 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import './bootstrap';
-import {createApp} from 'vue';
+import './bootstrap'
+import '../sass/app.scss'
+
+import { createApp } from 'vue'
+import router from '@/router'
+import store from '@/store'
+
+import App from '@/App.vue'
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -13,7 +19,7 @@ import {createApp} from 'vue';
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
+const app = createApp(App)
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,13 +29,13 @@ const app = createApp({});
  * Eg. ./Components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Object.entries(import.meta.glob('./**/*.vue', {eager: true}))
+Object.entries(import.meta.glob('./**/*.vue', { eager: true }))
     .forEach(([path, definition]) => {
         app.component(
             path.split('/').pop().replace(/\.\w+$/, ''),
             definition.default
-        );
-    });
+        )
+    })
 
 /**
  * Finally, we will attach the application instance to an HTML element with
@@ -37,6 +43,9 @@ Object.entries(import.meta.glob('./**/*.vue', {eager: true}))
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.provide('_', _);
-app.provide('axios', axios);
-app.mount('#app');
+app.use(router)
+app.use(store)
+
+app.provide('_', _)
+app.provide('http', axios)
+app.mount('#app')

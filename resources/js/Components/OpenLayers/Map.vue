@@ -3,10 +3,10 @@
 </template>
 
 <script setup>
-import Map from 'ol/Map';
-import View from 'ol/View';
-import OSM from 'ol/source/OSM';
-import TileLayer from 'ol/layer/Tile';
+import Map from 'ol/Map'
+import View from 'ol/View'
+import OSM from 'ol/source/OSM'
+import TileLayer from 'ol/layer/Tile'
 
 const map = new Map({
     target: 'map',
@@ -19,7 +19,7 @@ const map = new Map({
         center: [0, 0],
         zoom: 2
     })
-});
+})
 </script>
 
 <style scoped>

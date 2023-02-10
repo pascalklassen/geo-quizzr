@@ -6,27 +6,33 @@
                     <div class="card-header">Create your profile</div>
 
                     <div class="card-body">
-                        <form class="row g-3" action="" method="POST">
+                        <form class="row g-3" action="javascript:void(0)" method="POST">
                             <div class="col-12">
-                                <input-field v-model="v$.email.$model" :validation="v$.email" name="email" label="Your email address" type="mail" />
+                                <input-field v-model="v$.email.$model" :validation="v$.email" name="email"
+                                             label="Your email address" type="mail"/>
                             </div>
                             <div class="col-12">
-                                <input-field v-model="v$.username.$model" :validation="v$.username" name="username" label="Your username" prepend="@" type="text"/>
+                                <input-field v-model="v$.username.$model" :validation="v$.username" name="username"
+                                             label="Your username" prepend="@" type="text"/>
                             </div>
                             <div class="col-md-6 col-12">
-                                <input-field v-model="v$.password.$model" :validation="v$.password" name="password" label="Your password" type="password" />
+                                <input-field v-model="v$.password.$model" :validation="v$.password" name="password"
+                                             label="Your password" type="password"/>
                             </div>
                             <div class="col-md-6 col-12">
-                                <input-field v-model="v$.confirmPassword.$model" :validation="v$.confirmPassword" name="confirm_password" label="Confirm your password" type="password" />
+                                <input-field v-model="v$.confirmPassword.$model" :validation="v$.confirmPassword"
+                                             name="confirm_password" label="Confirm your password" type="password"/>
                             </div>
 
                             <div class="col-12">
                                 <button
+                                    @click="register"
                                     class="btn"
                                     :class="v$.$invalid ? 'btn-outline-danger' : 'btn-success'"
                                     :disabled="v$.$invalid"
                                     type="submit"
-                                >Create now</button>
+                                >Create now
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -37,8 +43,10 @@
 </template>
 
 <script setup>
-import { reactive, toRef } from 'vue';
-import { useVuelidate } from '@vuelidate/core';
+import { reactive, toRef } from 'vue'
+
+import { useStore } from 'vuex'
+import { useVuelidate } from '@vuelidate/core'
 
 import {
     helpers,
@@ -47,16 +55,18 @@ import {
     sameAs,
     minLength,
     maxLength,
-} from '@vuelidate/validators';
+} from '@vuelidate/validators'
 
-import InputField from '../Components/Forms/InputField.vue';
+import InputField from '@/Components/Forms/InputField.vue'
+
+const store = useStore()
 
 const fields = reactive({
     email: '',
     username: '',
     password: '',
     confirmPassword: ''
-});
+})
 
 const rules = {
     email: {
@@ -119,7 +129,21 @@ const rules = {
     }
 }
 
-const v$ = useVuelidate(rules, fields);
+const v$ = useVuelidate(rules, fields)
+
+async function register() {
+    try {
+        await axios.get('/sanctum/csrf-cookie')
+        await axios.post('/register', {
+            name: fields.username,
+            email: fields.email,
+            password: fields.password
+        })
+        await store.dispatch('auth/login')
+    } catch (e) {
+        console.error(e)
+    }
+}
 </script>
 
 <style scoped>

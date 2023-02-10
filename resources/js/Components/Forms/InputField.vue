@@ -21,7 +21,8 @@
         <div v-if="props.validation.$error" :class="{ 'd-block': props.validation.$error }" class="invalid-feedback">
             {{ props.validation.$errors.shift().$message }}
         </div>
-        <div v-if="props.validation.$dirty && !props.validation.$invalid" :class="{ 'd-block': !props.validation.$error }" class="valid-feedback">
+        <div v-if="props.validation.$dirty && !props.validation.$invalid"
+             :class="{ 'd-block': !props.validation.$error }" class="valid-feedback">
             Looks good!
         </div>
     </div>
@@ -36,11 +37,11 @@ const props = defineProps([
     'modelValue',
     'validation',
     'required'
-]);
+])
 
 defineEmits([
     'update:modelValue'
-]);
+])
 </script>
 
 <style scoped>

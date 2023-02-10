@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('app')
 
 @section('content')
-    <register-view />
+    <register-view/>
 @endsection
 
 {{--
