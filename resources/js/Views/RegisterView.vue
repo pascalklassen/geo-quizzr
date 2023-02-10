@@ -1,32 +1,33 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-5">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">Create your profile</div>
 
                     <div class="card-body">
-                        <form action="" class="" method="POST">
-                            <div class="row mb-3">
+                        <form class="row g-3" action="" method="POST">
+                            <div class="col-12">
                                 <input-field v-model="v$.email.$model" :validation="v$.email" name="email" label="Your email address" type="mail" />
                             </div>
-                            <div class="row mb-3">
+                            <div class="col-12">
                                 <input-field v-model="v$.username.$model" :validation="v$.username" name="username" label="Your username" prepend="@" type="text"/>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-xl">
-                                    <input-field v-model="v$.password.$model" :validation="v$.password" name="password" label="Your password" type="password" />
-                                </div>
-                                <div class="col-xl">
-                                    <input-field v-model="v$.confirmPassword.$model" :validation="v$.confirmPassword" name="confirm_password" label="Confirm your password" type="password" />
-                                </div>
+                            <div class="col-md-6 col-12">
+                                <input-field v-model="v$.password.$model" :validation="v$.password" name="password" label="Your password" type="password" />
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <input-field v-model="v$.confirmPassword.$model" :validation="v$.confirmPassword" name="confirm_password" label="Confirm your password" type="password" />
                             </div>
 
-                            <button
-                                class="btn"
-                                :class="v$.$invalid ? 'btn-outline-danger' : 'btn-success'"
-                                :disabled="v$.$invalid"
-                                type="submit">Create now</button>
+                            <div class="col-12">
+                                <button
+                                    class="btn"
+                                    :class="v$.$invalid ? 'btn-outline-danger' : 'btn-success'"
+                                    :disabled="v$.$invalid"
+                                    type="submit"
+                                >Create now</button>
+                            </div>
                         </form>
                     </div>
                 </div>
